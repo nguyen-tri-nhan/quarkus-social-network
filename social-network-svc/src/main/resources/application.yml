@@ -1,0 +1,84 @@
+aws:
+  local-endpoint: http://localhost:4566
+  local: &aws-local
+    region: us-east-1
+    credentials:
+      type: STATIC
+      static-provider:
+        access-key-id: test
+        secret-access-key: test
+  cloud: &aws-cloud
+    region: us-east-1
+    credentials:
+      type: default
+
+quarkus:
+  s3:
+    sync-client:
+      type: apache
+    path-style-access: true
+    aws: *aws-cloud
+
+  datasource:
+    db-kind: postgresql
+    jdbc:
+      max-size: 10
+      min-size: 2
+      url: jdbc:postgresql://localhost:5432/social-network-svc?currentSchema=social_network_objs
+    password: postgres
+    username: postgres
+  hibernate-orm:
+    packages: com.nhan.social, io.quarkus.hibernate.orm.panache
+    physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+    database:
+      generation: none
+    log:
+      sql: false
+    social:
+      datasource: social
+      packages: com.nhan.social
+      database:
+        generation: none
+  liquibase:
+    liquibase:
+      migrate-at-start: false
+    access-log:
+      enabled: true
+  banner:
+    path: banner.txt
+
+'%dev':
+  quarkus:
+    http:
+      port: 8085
+    log:
+      console:
+        json: false
+    s3:
+      endpoint-override: ${aws.local-endpoint}
+      aws: *aws-local
+    devservices:
+      enabled: false
+
+'%test':
+  quarkus:
+    s3:
+      endpoint-override: ${aws.local-endpoint}
+      aws: *aws-local
+    hibernate-orm:
+      log:
+        bind-parameters: false
+        sql: false
+      database:
+        generation: none
+    liquibase:
+      change-log: liquibase/changelog-test.xml
+      migrate-at-start: true
+    log:
+      console:
+        json: false
+
+  social:
+    s3:
+      endpoint-override: ${aws.local-endpoint}
+      aws: *aws-local

@@ -1,0 +1,130 @@
+import java.text.SimpleDateFormat
+
+plugins {
+    id 'java'
+    id 'checkstyle'
+    id 'jacoco'
+    alias(libs.plugins.quarkus)
+    alias(libs.plugins.sonarqube)
+    alias(libs.plugins.liquibase)
+    alias(libs.plugins.jgitver)
+}
+
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation(enforcedPlatform(libs.quarkus.bom))
+    implementation(enforcedPlatform(libs.quarkus.aws.bom))
+    implementation(libs.quarkus.arc)
+    implementation(libs.quarkus.config.yaml)
+    implementation(libs.quarkus.rest)
+    implementation(libs.quarkus.rest.jackson)
+    implementation(libs.quarkus.smallrye.openapi)
+    implementation(libs.commons.io)
+    implementation(libs.quarkus.container.image.jib)
+    implementation(libs.quarkus.smallrye.health)
+    implementation(libs.quarkus.logging.json)
+    implementation(libs.quarkus.hibernate.validator)
+    implementation(libs.quarkus.hibernate.orm.panache)
+    implementation(libs.quarkus.jdbc.postgresql)
+    implementation(libs.mapstruct)
+    implementation(libs.quarkus.rest.client)
+    implementation(libs.quarkus.rest.client.jackson)
+    implementation(libs.quarkus.rest.qute)
+    implementation(libs.quarkus.smallrye.jwt)
+    implementation(libs.quarkus.smallrye.jwt.build)
+    implementation(libs.quarkus.info)
+    implementation(libs.guava)
+
+    implementation(libs.quarkus.aws.s3)
+    implementation(libs.quarkus.aws.sqs)
+    implementation(libs.amazon.netty.client)
+    implementation(libs.amazon.sts)
+
+    implementation(libs.launchdarkly.java.server.sdk)
+
+    implementation(libs.okhttp)
+
+    implementation(libs.quarkus.liquibase)
+    liquibaseRuntime(libs.liquibasecore)
+    liquibaseRuntime(libs.postgresql)
+    liquibaseRuntime(libs.picocli)
+    liquibaseRuntime(libs.liquibase.hibernate)
+    liquibaseRuntime(libs.spring.data.jpa)
+    liquibaseRuntime sourceSets.main.runtimeClasspath
+    liquibaseRuntime sourceSets.main.output
+
+    implementation(libs.quarkus.opentelemetry)
+    implementation(libs.quarkiverse.micrometer.registry.otlp)
+
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
+    annotationProcessor(libs.mapstruct.processor)
+
+    testImplementation(libs.quarkus.jacoco)
+    testImplementation(libs.quarkus.junit)
+    testImplementation(libs.quarkus.junit.mockito)
+    testImplementation(libs.restassured)
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.okhttp.mockwebserver)
+    testImplementation(libs.aws.sdk.core)
+    testImplementation(libs.testcontainers.localstack)
+    testImplementation(libs.testcontainers.postgresql)
+    testImplementation(libs.testcontainers.junit.jupiter)
+    testImplementation(libs.awaitility)
+}
+
+group 'com.nhan.social'
+version '0.0.1'
+
+configurations {
+    liquibaseRuntime.extendsFrom runtime
+}
+
+diff.dependsOn compileJava
+diffChangelog.dependsOn compileJava
+generateChangelog.dependsOn compileJava
+
+def logFile = project.getProperty("liquibase.changeLogFile")
+if (logFile.length() == 0) {
+    def liquibaseChangelogSuffix = new SimpleDateFormat("yyMMddHHmm").format(new Date())
+    logFile = "${project.projectDir}/src/main/resources/liquibase/${liquibaseChangelogSuffix}.xml"
+}
+liquibase {
+    activities {
+        main {
+            changelogFile logFile
+            liquibaseSchemaName project.getProperty("liquibase.liquibaseSchema")
+            url project.getProperty("liquibase.url")
+            username project.getProperty("liquibase.username")
+            password project.getProperty("liquibase.password")
+            referenceUrl project.getProperty("liquibase.reference.url")
+            referenceDriver project.getProperty("liquibase.reference.driver")
+            defaultSchemaName project.getProperty("liquibase.schema")
+        }
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+task printVersion {
+    doLast {
+        file("$projectDir/version").text = "$version"
+    }
+}

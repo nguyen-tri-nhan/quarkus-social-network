@@ -1,0 +1,2 @@
+CREATE SCHEMA IF NOT EXISTS admin;
+CREATE SCHEMA IF NOT EXISTS social_network_objs;

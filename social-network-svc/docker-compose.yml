@@ -1,0 +1,6 @@
+version: '3.9'
+services:
+  mini-social-network:
+    build: 
+      context: ../
+      dockerfile: social-network-svc/Dockerfile

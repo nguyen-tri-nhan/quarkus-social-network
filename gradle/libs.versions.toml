@@ -1,0 +1,108 @@
+[versions]
+quarkus = "3.9.0"
+mockito-inline = "5.2.0"
+lombok = "1.18.32"
+mapstruct = "1.5.5.Final"
+social-network = "0.0.1"
+rsql = "2.1.0"
+sonarqube = "4.0.0.2929"
+jgitver = "0.9.1"
+guava = "33.1.0-jre"
+aws = "2.13.1"
+liquibasegradle="2.2.0"
+liquibasecore="4.26.0"
+postgresql="42.7.3"
+picocli="4.7.5"
+hypersistence = "3.7.3"
+commonio = "2.15.1"
+springdatajpa = "3.2.4"
+awssdk = "1.12.684"
+awaitility = "4.2.1"
+launchdarkly= "7.3.0"
+quarkiverse-micrometer-registry = "3.2.4"
+okhttp = "4.12.0"
+
+[libraries]
+quarkus-bom = { group = "io.quarkus", name = "quarkus-bom", version.ref = "quarkus" }
+quarkus-config-yaml = { module = "io.quarkus:quarkus-config-yaml" }
+quarkus-arc = { module = "io.quarkus:quarkus-arc" }
+quarkus-rest = { module = "io.quarkus:quarkus-rest" }
+quarkus-rest-jackson = { module = "io.quarkus:quarkus-rest-jackson" }
+quarkus-rest-client = { module = "io.quarkus:quarkus-rest-client" }
+quarkus-rest-client-jsonb = { module = "io.quarkus:quarkus-rest-client-jsonb" }
+quarkus-rest-client-jackson = { module = "io.quarkus:quarkus-rest-client-jackson" }
+quarkus-smallrye-openapi = { module = "io.quarkus:quarkus-smallrye-openapi" }
+quarkus-smallrye-health = { module = "io.quarkus:quarkus-smallrye-health" }
+quarkus-hibernate-orm-rest-data-panache = { module = "io.quarkus:quarkus-hibernate-orm-rest-data-panache" }
+quarkus-hibernate-orm-panache = { module = "io.quarkus:quarkus-hibernate-orm-panache" }
+quarkus-messaging = { module = "io.quarkus:quarkus-messaging" }
+quarkus-rest-qute = { module = "io.quarkus:quarkus-rest-qute" }
+quarkus-cache = { module = "io.quarkus:quarkus-cache" }
+quarkus-redis-cache = { module = "io.quarkus:quarkus-redis-cache" }
+quarkus-container-docker = { module = "io.quarkus:quarkus-container-image-docker" }
+quarkus-kubernetes = { module = "io.quarkus:quarkus-kubernetes" }
+quarkus-kubernetes-client = { group = "io.quarkus", name = "quarkus-kubernetes-client" }
+quarkus-test-kubernetes-client = { group ="io.quarkus", name ="quarkus-test-kubernetes-client" }
+quarkus-hibernate-validator = { module = "io.quarkus:quarkus-hibernate-validator" }
+quarkus-jdbc-postgresql = { module = "io.quarkus:quarkus-jdbc-postgresql" }
+quarkus-container-image-jib = { module = "io.quarkus:quarkus-container-image-jib" }
+quarkus-liquibase = { module = "io.quarkus:quarkus-liquibase" }
+quarkus-jacoco = { module = "io.quarkus:quarkus-jacoco" }
+quarkus-junit = { module = "io.quarkus:quarkus-junit5" }
+quarkus-junit-mockito = { module = "io.quarkus:quarkus-junit5-mockito" }
+quarkus-aws-bom = { group = "io.quarkiverse.amazonservices", name = "quarkus-amazon-services-bom", version.ref = "aws" }
+quarkus-aws-s3 = { group = "io.quarkiverse.amazonservices", name = "quarkus-amazon-s3", version.ref = "aws" }
+quarkus-aws-sqs = { group = "io.quarkiverse.amazonservices", name = "quarkus-amazon-sqs", version.ref = "aws" }
+amazon-netty-client = { module = "software.amazon.awssdk:netty-nio-client" }
+amazon-sts = { module = "software.amazon.awssdk:sts"}
+quarkus-smallrye-jwt = { module = "io.quarkus:quarkus-smallrye-jwt" }
+quarkus-smallrye-jwt-build = { module = "io.quarkus:quarkus-smallrye-jwt-build" }
+quarkus-info = { module = "io.quarkus:quarkus-info" }
+quarkus-kafka = { module = "io.quarkus:quarkus-messaging-kafka"}
+quarkus-logging-json = { module = "io.quarkus:quarkus-logging-json"}
+quarkus-opentelemetry = { module = "io.quarkus:quarkus-opentelemetry" }
+quarkiverse-micrometer-registry-otlp = { module = "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-otlp", version.ref = "quarkiverse-micrometer-registry" }
+otel-instrumentation-jdbc = { module = "io.opentelemetry.instrumentation:opentelemetry-jdbc" }
+
+hypersistence-utils = { group = "io.hypersistence", name = "hypersistence-utils-hibernate-63", version.ref = "hypersistence" }
+
+commons-io = { group = "commons-io", name = "commons-io", version.ref = "commonio" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }
+
+liquibasecore = { group = "org.liquibase", name = "liquibase-core", version.ref = "liquibasecore" }
+postgresql = { group = "org.postgresql", name = "postgresql", version.ref = "postgresql" }
+picocli = { group = "info.picocli", name = "picocli", version.ref = "picocli" }
+liquibase-hibernate = { group = "org.liquibase.ext", name = "liquibase-hibernate6", version.ref = "liquibasecore"}
+spring-data-jpa = { group = "org.springframework.data", name = "spring-data-jpa", version.ref = "springdatajpa"}
+
+restassured = { module = "io.rest-assured:rest-assured" }
+rsql = { module = "cz.jirutka.rsql:rsql-parser", version.ref = "rsql" }
+testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
+testcontainers-junit-jupiter = { module = "org.testcontainers:junit-jupiter" }
+testcontainers-localstack = { module = "org.testcontainers:localstack" }
+mockito-inline = { group = "org.mockito", name = "mockito-inline", version.ref = "mockito-inline" }
+
+aws-sdk-core = { module = "com.amazonaws:aws-java-sdk-core", version.ref = "awssdk" }
+aws-sdk-url-connection-client = { module = "software.amazon.awssdk:url-connection-client"}
+
+launchdarkly-java-server-sdk = { group = "com.launchdarkly", name = "launchdarkly-java-server-sdk", version.ref = "launchdarkly"}
+
+awaitility = { module = "org.awaitility:awaitility", version.ref = "awaitility" }
+
+lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
+mapstruct = { group = "org.mapstruct", name = "mapstruct", version.ref = "mapstruct" }
+mapstruct-processor = { group = "org.mapstruct", name = "mapstruct-processor", version.ref = "mapstruct" }
+guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+
+[bundles]
+quarkus-unit = ["quarkus-junit", "quarkus-junit-mockito", "restassured"]
+quarkus-integration = ["quarkus-junit", "restassured"]
+quarkus-deployment = ["quarkus-container-docker", "quarkus-kubernetes"]
+
+[plugins]
+quarkus = { id = "io.quarkus", version.ref = "quarkus" }
+sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
+jgitver = { id = "fr.brouillard.oss.gradle.jgitver", version.ref = "jgitver" }
+liquibase = { id = "org.liquibase.gradle", version.ref = "liquibasegradle"}
+

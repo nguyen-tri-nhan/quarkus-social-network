@@ -1,0 +1,7 @@
+.gradle
+.idea
+.env
+.vscode
+
+build
+node_modules

@@ -1,0 +1,72 @@
+version: '3.9'
+networks:
+  social:
+    name: social
+
+services:
+  db:
+    image: postgres:14
+    container_name: g5-postgres
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "social-network-svc"
+    ports:
+      - "5432:5432"
+    command: >
+      postgres
+      -c log_statement=all
+    healthcheck:
+      test: "pg_isready -U postgres -d postgres"
+      interval: 2s
+      timeout: 20s
+      retries: 10
+    volumes:
+      - "./development/postgres:/docker-entrypoint-initdb.d"
+      - "~/.postgres/social-network-data:/var/lib/postgresql/data"
+    networks:
+      - social
+
+  localstack:
+    image: localstack/localstack:3.2.0
+    container_name: g5-localstack
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+      # GATEWAY_LISTEN: which will allow configuration of the addresses and ports the LocalStack process listens on.
+      # It takes the form `<ip address>[:port][,<ip address>:<port>...]`
+      - "GATEWAY_LISTEN=0.0.0.0:4566"
+      - PERSISTENCE=1
+    ports:
+      - "4566:4566"
+    volumes:
+      - "~/.localstack:/var/lib/localstack"
+      - "./development/localstack/init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh"
+      - "./development/data:/var/local"
+    networks:
+      - social
+
+  redis:
+    image: redis
+    container_name: g5-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - "~/.redis:/var/lib/redis"
+    networks:
+      - social
+
+  kafka:
+    image: vectorized/redpanda:v23.3.9
+    container_name: g5-kafka
+    command: [
+      "redpanda", "start",
+      "--overprovisioned --smp 1 --memory 1G --reserve-memory 0M --node-id 0 --check=false",
+      "--kafka-addr PLAINTEXT://0.0.0.0:19092,EXTERNAL://0.0.0.0:9092",
+      "--advertise-kafka-addr PLAINTEXT://kafka:19092,EXTERNAL://localhost:9092"
+    ]
+    ports:
+      - "9092:9092"
+      - "19092:19092"
+    networks:
+      - social
+
