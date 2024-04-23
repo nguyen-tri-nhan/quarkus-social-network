@@ -18,9 +18,9 @@ commonio = "2.15.1"
 springdatajpa = "3.2.4"
 awssdk = "1.12.684"
 awaitility = "4.2.1"
-launchdarkly= "7.3.0"
 quarkiverse-micrometer-registry = "3.2.4"
 okhttp = "4.12.0"
+jasypt = "1.9.3"
 
 [libraries]
 quarkus-bom = { group = "io.quarkus", name = "quarkus-bom", version.ref = "quarkus" }
@@ -86,14 +86,14 @@ mockito-inline = { group = "org.mockito", name = "mockito-inline", version.ref =
 aws-sdk-core = { module = "com.amazonaws:aws-java-sdk-core", version.ref = "awssdk" }
 aws-sdk-url-connection-client = { module = "software.amazon.awssdk:url-connection-client"}
 
-launchdarkly-java-server-sdk = { group = "com.launchdarkly", name = "launchdarkly-java-server-sdk", version.ref = "launchdarkly"}
-
 awaitility = { module = "org.awaitility:awaitility", version.ref = "awaitility" }
 
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
 mapstruct = { group = "org.mapstruct", name = "mapstruct", version.ref = "mapstruct" }
 mapstruct-processor = { group = "org.mapstruct", name = "mapstruct-processor", version.ref = "mapstruct" }
 guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+
+jasypt = { group = "org.jasypt", name = "jasypt", version.ref = "jasypt"}
 
 [bundles]
 quarkus-unit = ["quarkus-junit", "quarkus-junit-mockito", "restassured"]

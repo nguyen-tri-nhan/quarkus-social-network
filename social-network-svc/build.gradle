@@ -45,9 +45,9 @@ dependencies {
     implementation(libs.amazon.netty.client)
     implementation(libs.amazon.sts)
 
-    implementation(libs.launchdarkly.java.server.sdk)
-
     implementation(libs.okhttp)
+
+    implementation(libs.jasypt)
 
     implementation(libs.quarkus.liquibase)
     liquibaseRuntime(libs.liquibasecore)

@@ -6,7 +6,7 @@ networks:
 services:
   db:
     image: postgres:14
-    container_name: g5-postgres
+    container_name: social-postgres
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
@@ -29,7 +29,7 @@ services:
 
   localstack:
     image: localstack/localstack:3.2.0
-    container_name: g5-localstack
+    container_name: social-localstack
     environment:
       - AWS_DEFAULT_REGION=us-east-1
       # GATEWAY_LISTEN: which will allow configuration of the addresses and ports the LocalStack process listens on.
@@ -47,7 +47,7 @@ services:
 
   redis:
     image: redis
-    container_name: g5-redis
+    container_name: social-redis
     ports:
       - "6379:6379"
     volumes:
@@ -57,7 +57,7 @@ services:
 
   kafka:
     image: vectorized/redpanda:v23.3.9
-    container_name: g5-kafka
+    container_name: social-kafka
     command: [
       "redpanda", "start",
       "--overprovisioned --smp 1 --memory 1G --reserve-memory 0M --node-id 0 --check=false",

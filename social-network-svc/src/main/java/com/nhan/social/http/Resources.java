@@ -12,4 +12,9 @@ public class Resources {
         public static final String HELLO = API_V1 + "/hello";
     }
 
+    public static class User {
+        private User() {}
+        public static final String COLLECTION = API_V1 + "/user";
+    }
+
 }
