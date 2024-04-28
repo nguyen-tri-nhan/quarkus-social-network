@@ -6,6 +6,7 @@ import com.nhan.social.user.domain.User;
 import com.nhan.social.user.service.UserService;
 import io.smallrye.mutiny.Uni;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -27,8 +28,7 @@ public class UserResource {
     @POST
     @Blocking
     @Transactional
-    public Uni<User> create(CreateUserPayload user) {
-
+    public Uni<User> create(@Valid CreateUserPayload user) {
         return Uni
                 .createFrom()
                 .item(() -> userService.create(user));

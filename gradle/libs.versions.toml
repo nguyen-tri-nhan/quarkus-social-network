@@ -20,7 +20,7 @@ awssdk = "1.12.684"
 awaitility = "4.2.1"
 quarkiverse-micrometer-registry = "3.2.4"
 okhttp = "4.12.0"
-jasypt = "1.9.3"
+quarkus-bcrypt = "3.10.0.CR1"
 
 [libraries]
 quarkus-bom = { group = "io.quarkus", name = "quarkus-bom", version.ref = "quarkus" }
@@ -63,6 +63,7 @@ quarkus-logging-json = { module = "io.quarkus:quarkus-logging-json"}
 quarkus-opentelemetry = { module = "io.quarkus:quarkus-opentelemetry" }
 quarkiverse-micrometer-registry-otlp = { module = "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-otlp", version.ref = "quarkiverse-micrometer-registry" }
 otel-instrumentation-jdbc = { module = "io.opentelemetry.instrumentation:opentelemetry-jdbc" }
+quarkus-bcrypt = { module = "io.quarkus:quarkus-elytron-security-common", version.ref = "quarkus-bcrypt"}
 
 hypersistence-utils = { group = "io.hypersistence", name = "hypersistence-utils-hibernate-63", version.ref = "hypersistence" }
 
@@ -92,8 +93,6 @@ lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" 
 mapstruct = { group = "org.mapstruct", name = "mapstruct", version.ref = "mapstruct" }
 mapstruct-processor = { group = "org.mapstruct", name = "mapstruct-processor", version.ref = "mapstruct" }
 guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
-
-jasypt = { group = "org.jasypt", name = "jasypt", version.ref = "jasypt"}
 
 [bundles]
 quarkus-unit = ["quarkus-junit", "quarkus-junit-mockito", "restassured"]

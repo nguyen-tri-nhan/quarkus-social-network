@@ -47,7 +47,7 @@ dependencies {
 
     implementation(libs.okhttp)
 
-    implementation(libs.jasypt)
+    implementation(libs.quarkus.bcrypt)
 
     implementation(libs.quarkus.liquibase)
     liquibaseRuntime(libs.liquibasecore)

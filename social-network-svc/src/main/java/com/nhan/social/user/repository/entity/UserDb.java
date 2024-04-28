@@ -18,6 +18,10 @@ import java.util.UUID;
                 @UniqueConstraint(
                         name = "uk_user_account_username",
                         columnNames = {"username"}
+                ),
+                @UniqueConstraint(
+                        name = "uk_user_account_username_email",
+                        columnNames = {"username, email"}
                 )
         }
 )
